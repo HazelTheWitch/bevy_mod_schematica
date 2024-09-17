@@ -5,7 +5,6 @@ use std::{
 
 use bevy_ecs::{
     bundle::Bundle,
-    component::Component,
     entity::Entity,
     system::Commands,
     world::{Command, World},
@@ -189,9 +188,9 @@ pub trait Schematic: Send + 'static {
     fn instantiate(self, ctx: &mut SchematicContext) -> SchematicResult;
 }
 
-impl<C> Schematic for C
+impl<B> Schematic for B
 where
-    C: Component + Send + 'static,
+    B: Bundle + Send + 'static,
 {
     fn instantiate(self, ctx: &mut SchematicContext) -> SchematicResult {
         ctx.insert(self);
