@@ -1,0 +1,15 @@
+[package]
+name = "bevy_mod_schematica"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+resolver = "2"
+members = ["bevy_mod_schematica_macros"]
+
+[dependencies]
+bevy_ecs = "0.14.2"
+bevy_hierarchy = "0.14.2"
+serde = { version = "1.0.210", features = ["derive"] }
+smallvec = "1.13.2"
+bevy_mod_schematica_macros = { path = "bevy_mod_schematica_macros"}
