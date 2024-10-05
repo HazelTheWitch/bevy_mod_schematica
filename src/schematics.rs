@@ -1,5 +1,6 @@
 use crate::{Schematic, SchematicContext, SchematicResult};
 
+/// Maybe apply a schematic or do nothing
 #[derive(Debug, Clone, Copy)]
 pub enum Maybe<S> {
     Some(S),
@@ -18,23 +19,28 @@ where
     }
 }
 
+/// Apply either some schematic or the default schematic
 #[derive(Debug, Clone, Copy)]
-pub struct OrDefault<S>(pub Option<S>);
+pub enum OrDefault<S> {
+    Some(S),
+    Default,
+}
 
 impl<S> Schematic for OrDefault<S>
 where
     S: Schematic + Default,
 {
     fn instantiate(self, ctx: &mut SchematicContext) -> SchematicResult {
-        let schematic = match self.0 {
-            Some(schematic) => schematic,
-            None => S::default(),
+        let schematic = match self {
+            OrDefault::Some(schematic) => schematic,
+            OrDefault::Default => S::default(),
         };
 
         schematic.instantiate(ctx)
     }
 }
 
+/// Apply tuples of different schematics
 #[derive(Debug, Clone, Copy)]
 pub struct Many<T>(pub T);
 

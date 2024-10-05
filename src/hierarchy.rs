@@ -1,5 +1,6 @@
 use crate::{Schematic, SchematicContext, SchematicError, SchematicResult};
 
+/// Apply a schematic to the parent of the current entity.
 #[derive(Debug, Clone, Copy)]
 pub struct Parent<S>(pub S);
 
@@ -18,6 +19,7 @@ where
     }
 }
 
+/// Create children and apply schematics for each.
 #[derive(Debug, Clone)]
 pub struct Children<S>(pub Vec<S>);
 
@@ -32,6 +34,7 @@ where
     }
 }
 
+/// Repeat a schematic `count` times
 #[derive(Debug, Clone, Copy)]
 pub struct RepeatChildren<S> {
     pub schematic: S,

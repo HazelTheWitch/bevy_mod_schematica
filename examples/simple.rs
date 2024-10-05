@@ -30,9 +30,9 @@ fn main() {
         a: A,
         b: B { x: 4, y: 6 },
         c: Children(vec![
-            Many((C(0), OrDefault(Some(D(10))))),
-            Many((C(1), OrDefault(None))),
-            Many((C(2), OrDefault(None))),
+            Many((C(0), OrDefault::Some(D(10)))),
+            Many((C(1), OrDefault::Default)),
+            Many((C(2), OrDefault::Default)),
         ]),
     };
 
